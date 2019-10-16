@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--将父组件中的数据传递给子组件-->
-    <Menu :menus="menus" :webSite="webSite" @addMenuEvent="addMenu"/>
+    <Menu :menus="menus" :webSite="webSite" ref="menu"/>
   </div>
 </template>
 
@@ -39,6 +39,9 @@
         // 向 menus 数组尾部添加新的菜单
         this.menus.push(menu);
       }
+    },
+    mounted() {
+      this.$refs.menu.$on('addMenuEvent', this.addMenu)
     }
   }
 </script>
