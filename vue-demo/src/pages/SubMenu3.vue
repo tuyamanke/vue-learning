@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>用户ID: {{$route.params.userId}}</p>
+    <p>用户ID: {{$route.query.userId}}</p>
     <p>用户名：{{userInfo.userName}}</p>
     <p>电话：{{userInfo.phoneNumber}}</p>
     <p>邮箱：{{userInfo.email}}</p>
@@ -23,7 +23,7 @@
       }
     },
     mounted() {
-      let userId = this.$route.params.userId;
+      let userId = this.$route.query.userId;
       let userDetailApi = `http://localhost:3000/users/detail/${userId}`;
       Axios.get(userDetailApi).then(response => {
         if (response.data.code === 0) {
@@ -38,7 +38,7 @@
     watch: {
       // 监控 $route 的变化，newValue 就是变化后的 $route 的值
       $route(newValue) {
-        let userId = this.$route.params.userId;
+        let userId = this.$route.query.userId;
         let userDetailApi = `http://localhost:3000/users/detail/${userId}`;
         Axios.get(userDetailApi).then(response => {
           if (response.data.code === 0) {

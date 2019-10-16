@@ -42,7 +42,7 @@ export default new VueRouter({
       component: Menu2,
       children: [
         {
-          path: 'subMenu3/:userId',
+          path: 'subMenu3',
           component: SubMenu3,
         }
       ]

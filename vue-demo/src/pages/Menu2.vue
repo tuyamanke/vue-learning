@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="(user, index) in userList" :key="index">
-        <router-link :to="`/menu2/subMenu3/${user.id}`">{{user.userName}}</router-link>
+        <router-link :to="`/menu2/subMenu3?userId=${user.id}`">{{user.userName}}</router-link>
       </li>
     </ul>
     <hr>
