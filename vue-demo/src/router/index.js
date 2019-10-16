@@ -3,8 +3,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../pages/Index'
 import Menu1 from '../pages/Menu1'
+import Menu2 from '../pages/Menu2'
 import SubMenu1 from '../pages/SubMenu1'
 import SubMenu2 from '../pages/SubMenu2'
+import SubMenu3 from '../pages/SubMenu3'
 
 Vue.use(VueRouter);
 
@@ -32,6 +34,16 @@ export default new VueRouter({
         {
           path: '/',
           redirect: 'submenu1'
+        }
+      ]
+    },
+    {
+      path: '/menu2',
+      component: Menu2,
+      children: [
+        {
+          path: 'subMenu3/:userId',
+          component: SubMenu3,
         }
       ]
     },

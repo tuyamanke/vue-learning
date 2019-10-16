@@ -10,6 +10,9 @@
           <!--<a href="">菜单一</a>-->
           <router-link to="/menu1">菜单一</router-link>
         </li>
+        <li>
+          <router-link to="/menu2">用户列表</router-link>
+        </li>
       </ul>
     </div>
     <div class="content">
