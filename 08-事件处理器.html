@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08-事件处理器</title>
+</head>
+<body>
+<div id="app">
+    <button @click="counter += 1">Add 1</button>
+    <p>The button above has been clicked {{counter}} times.</p>
+    <button @click="greet">greet</button>
+    <button @click="say('hello')">sayMessage</button>
+    <!--在内联语句处理器中访问原生的 DOM 事件，可以用特殊的变量 $event 把它传入-->
+    <button @click="warn('Form can not be submitted yet.', $event)">Submit</button>
+    <a href="http://www.baidu.com" @click="doThis">百度</a>
+    <!-- .prevent: 方法执行后不再重载页面-->
+    <a href="http://www.baidu.com" @click.prevent="doThis">百度</a>
+    <br>
+    <div @click="doDivClick" style="width: 200px;height: 100px;background-color: yellow">
+        <!--这里点击后虽然不会重载页面，但点击事件会继续向父组件传播，也会触发父组件的点击事件-->
+        <a href="http://www.baidu.com" @click.prevent="doThis">百度</a>
+    </div>
+    <div @click="doDivClick" style="width: 200px;height: 100px;background-color: green">
+        <!--.stop: 可以阻止事件继续向父组件传播，但这里没有 .prevent 所以会重载页面-->
+        <a href="http://www.baidu.com" @click.stop="doThis">百度</a>
+    </div>
+    <div @click="doDivClick" style="width: 200px;height: 100px;background-color: orange">
+        <!--修饰符可以串联，这样既有 .prevent 不会重载页面，也有 .stop 不会向父组件传播事件-->
+        <a href="http://www.baidu.com" @click.stop.prevent="doThis">百度</a>
+    </div>
+
+    <input @keyup.enter="submit" placeholder="按回车提交" v-model="formData">
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            counter: 0,
+            name: 'vue',
+            formData:''
+        },
+        methods: {
+            // event 是原生 dom 事件
+            greet(event) {
+                alert(`hello, ${this.name}!`);
+                if (event) {
+                    alert(event.target.tagName);
+                }
+            },
+            say(message) {
+                alert(message);
+            },
+            warn(message, event) {
+                if (event) {
+                    event.preventDefault();
+                    alert(message);
+                }
+            },
+            doThis() {
+                alert('点击了 a 标签');
+            },
+            doDivClick() {
+                alert('点击了 div 标签');
+            },
+            submit() {
+                alert(`Submit data: ${this.formData}`);
+            }
+        }
+    });
+
+    // 也可以通过 Vue 实例直接调用其方法
+    // vm.greet();
+</script>
+</html>

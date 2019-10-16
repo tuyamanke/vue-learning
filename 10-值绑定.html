@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-值绑定</title>
+</head>
+<body>
+<div id="app">
+    <!--复选框可以指定选中和不选时的 value 值-->
+    <input type="checkbox" v-model="toggle" true-value="yes" false-value="no"/>
+    <!--单选的 value 一般都是写死的，这里把它绑定到变量，把本来写死的 value 写活了-->
+    <input type="radio" v-model="pick" :value="a">
+    <select v-model="selected">
+        <!--内联对象字面量-->
+        <option :value="{ number: 123 }">123</option>
+    </select>
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let app = new Vue({
+        el: '#app',
+        data: {
+            toggle: '',
+            a: 'aa',
+            pick: '',
+            selected: null
+        },
+        methods: {}
+    });
+</script>
+</html>

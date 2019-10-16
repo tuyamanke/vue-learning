@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04-循环语句</title>
+</head>
+<body>
+<div id="app">
+    <h2>列表遍历</h2>
+    <ul>
+        <li v-for="item in items">
+            {{item.name}}
+        </li>
+    </ul>
+
+    <h2>index 索引参数</h2>
+    <ul>
+        <li v-for="(item, index) in items">
+            {{index}}-{{item.name}}
+        </li>
+    </ul>
+
+    <h2>遍历对象</h2>
+    <ul>
+        <li v-for="value in user">
+            {{value}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(value, name, index) in user">
+            {{index}}-{{name}}-{{value}}
+        </li>
+    </ul>
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let app = new Vue({
+        el: '#app',
+        data: {
+            items: [
+                {name: 'Beijing'},
+                {name: 'Nanjing'},
+                {name: 'Shanghai'}
+            ],
+            user: {
+                userName: 'wen',
+                password: '123456',
+                age: 20
+            }
+        },
+        methods: {}
+    });
+</script>
+</html>

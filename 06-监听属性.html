@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-监听属性</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="number">&nbsp;&nbsp;的平方是：&nbsp;&nbsp;{{computedNumber}}
+    <br>
+    <input type="text" v-model="number">&nbsp;&nbsp;的平方是：&nbsp;&nbsp;{{result}}
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            number: 1,
+            result: 1
+        },
+        computed: {
+            computedNumber() {
+                return this.number * this.number;
+            }
+        },
+        methods: {},
+        // 监听的一种写法
+        // watch: {
+        //     number(newValue, oldValue) {
+        //         console.log(`newValue: ${newValue}, oldValue: ${oldValue}`);
+        //         this.result = this.number * this.number;
+        //     }
+        // }
+    });
+    // 监听的另一种写法
+    vm.$watch('number', function (newValue, oldValue) {
+        console.log(`newValue: ${newValue}, oldValue: ${oldValue}`);
+        this.result = this.number * this.number;
+    });
+</script>
+</html>

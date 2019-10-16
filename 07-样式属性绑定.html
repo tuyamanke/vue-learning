@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07-样式属性绑定</title>
+    <style>
+        .aClass {
+            color: red;
+        }
+
+        .bClass {
+            color: blue;
+        }
+
+        .cClass {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2>class 样式属性绑定</h2>
+    <p class="aClass">
+        class 样式属性绑定
+    </p>
+    <br>
+    <p :class="className">
+        class 样式属性绑定
+    </p>
+    <p class="bClass cClass">
+        多样式处理
+    </p>
+    <p :class="{bClass:isB, cClass:isC}">
+        多样式处理
+    </p>
+    <br>
+    <button @click="changeClass">修改</button>
+
+    <h2>style 内联样式绑定</h2>
+    <p :style="{color: activeColor, fontSize: fontSize + 'px'}">style 内联样式绑定</p>
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let app = new Vue({
+        el: '#app',
+        data: {
+            className: 'aClass',
+            isB: true,
+            isC: false,
+            activeColor: 'red',
+            fontSize: 20
+        },
+        methods: {
+            changeClass() {
+                this.className = this.className === 'aClass' ? 'bClass' : 'aClass';
+                this.isC = !this.isC;
+                this.activeColor = this.activeColor === 'red' ? 'blue' : 'red';
+            }
+        }
+    });
+</script>
+</html>

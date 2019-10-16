@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09-表单输入绑定</title>
+</head>
+<body>
+<div id="app">
+    <h2>表单</h2>
+    <!--利用 v-model 进行表单数据双向绑定-->
+    <input type="text" placeholder="edit me" v-model="message">
+    <!-- .lazy : 只有输入完成之后才会触发双向绑定，v-model 默认有 input 就会触发-->
+    <input type="text" placeholder="lazy edit me" v-model.lazy="message">
+    <!--input 加上 type="number" 和 v-model.number 后就只能输入数字类型了-->
+    <input type="number" placeholder="only number edit me" v-model.number="message">
+    <!--.trim: 过滤掉前后的空字符-->
+    <input type="text" placeholder="trim edit me" v-model.trim="message">
+    <p>message is: {{message}}</p>
+
+    <h2>多行文本框</h2>
+    <span>multi line message is: </span>
+    <p style="white-space: pre-line;">{{message}}</p>
+    <br>
+    <textarea v-model="message" placeholder="add multi lines." id="" cols="30" rows="10"></textarea>
+
+    <hr>
+    <h2>复选框</h2>
+    <!--单个复选框绑定到一个变量-->
+    <!--此处没加 value 属性, 默认选中就是 true ,不选中就是 false-->
+    <input type="checkbox" id="checkbox" v-model="singleCheckBox">
+    <label for="checkbox">{{singleCheckBox}}</label>
+
+    <h2>多个复选框</h2>
+    <!--多个复选框绑定到一个数组,因为可能有多个值,所以要用数组-->
+    <!--如果多个复选框也绑定到一个非数组变量,其中一个改变了该绑定变量的值,其他复选框也会受影响-->
+    <!--典型的就是一选全选,一不选全不选-->
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{checkedNames}}</span>
+
+    <h2>单选按钮</h2>
+    <!--单选框绑定到一个变量,因为只能选择一个,所以常规变量就行了-->
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{picked}}</span>
+
+    <h2>单选下拉框</h2>
+    <select v-model="selected">
+        <option value="" disabled>请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>{{selected}}</span>
+
+    <h2>多选下拉框</h2>
+    <select v-model="multiSelected" multiple>
+        <option value="" disabled>请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>{{multiSelected}}</span>
+
+    <!--动态渲染下拉框-->
+    <h2>动态渲染下拉框</h2>
+    <select v-model="selected02">
+        <option v-for="option in options" :value="option.value">
+            {{option.text}}
+        </option>
+    </select>
+    <span>{{selected02}}</span>
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            singleCheckBox: true,
+            checkedNames: [],
+            picked: '',
+            selected: '',
+            multiSelected: [],
+            options: [{
+                text: '篮球',
+                value: 'basketball'
+            }, {
+                text: '足球',
+                value: 'football'
+            }, {
+                text: '乒乓球',
+                value: 'table-tennis'
+            }],
+            selected02: 'basketball'
+        },
+        methods: {},
+
+    });
+</script>
+</html>

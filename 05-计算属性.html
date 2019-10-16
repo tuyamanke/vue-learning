@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-计算属性</title>
+</head>
+<body>
+<div id="app">
+    <h2>计算属性</h2>
+    <p>OriginalMessage: {{message}}</p>
+    <p>ReversedMessage: {{message.split('').reverse().join('')}}</p>
+    <p>ComputedReversedMessage: {{reversedMessage}}</p>
+    <button @click="changeMessage">改变message</button>
+
+    <h2>计算属性缓存 VS 方法</h2>
+    <p>Computed Reversed Message: {{reversedMessage}}</p>
+    <p>Computed Reversed Message: {{reversedMessage}}</p>
+    <p>Function Reversed Message: {{reverseMessageFunc()}}</p>
+    <p>Function Reversed Message: {{reverseMessageFunc()}}</p>
+
+    <h2>计算属性的 setter 方法</h2>
+    <p>Computed Reversed Info: {{reversedInfo}}</p>
+    <button @click="computedReversedInfoSetter">计算属性setter</button>
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    let count = 1;
+    // 创建 Vue 实例
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello',
+            info: 'you are right.'
+        },
+        computed: {
+            // 计算属性的 getter
+            reversedMessage() {
+                // this 指向 app 这一 Vue 的实例
+                // Vue 知道 reversedMessage 依赖于 message，所以当 message 变化时会重新计算
+                count++;
+                return count + ':' + this.message.split('').reverse().join('');
+            },
+            // 计算属性还有一个 setter 方法，默认的是 getter
+            reversedInfo: {
+                // 计算属性的 getter
+                get() {
+                    console.log(`调用了 info 的 getter`)
+                    return this.info.split('').reverse().join('');
+                },
+                // 计算属性的 setter
+                set(newValue) {
+                    console.log(newValue);
+                    console.log(`计算属性的 setter 中的一些逻辑处理。`);
+                    this.info = newValue;
+                }
+            }
+        },
+        methods: {
+            changeMessage() {
+                this.message = 'new message.';
+            },
+            reverseMessageFunc() {
+                count++;
+                return count + ':' + this.message.split('').reverse().join('');
+            },
+            computedReversedInfoSetter() {
+                vm.reversedInfo = 'a new info';
+            }
+        }
+    });
+</script>
+</html>

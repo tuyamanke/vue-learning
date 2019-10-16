@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-条件语句</title>
+</head>
+<body>
+<div id="app">
+    <p>{{name}}</p>
+    <button @click="changeName">update</button>
+    <button @click="testDestroy">destroy</button>
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let app = new Vue({
+        el: '#app',
+        data: {
+            name: ''
+        },
+        methods: {
+            changeName() {
+                this.name = '修改后的数据';
+            },
+            testDestroy() {
+                // 销毁 Vue 实例要调用其 $destroy 方法
+                this.$destroy();
+            }
+        },
+        // 只执行一次
+        // 页面初始化的时候经常用到，如用 Ajax 请求数据初始化页面
+        mounted() {
+            console.log(`mounted() 初始化完成`);
+            this.name = '初始化数据';
+        },
+        // 每次更新都会执行
+        // 第一次 mounted 完成之后也会执行，因为是会赋默认值的过程
+        beforeUpdate() {
+            // 可以做一些业务上的操作
+            console.log(`beforeUpdate() 数据属性更新之前`);
+        },
+        // 每次更新都会执行
+        // 第一次 mounted 完成之后也会执行，因为是会赋默认值的过程
+        updated() {
+            // 可以做一些业务上的操作
+            console.log(`updated() 数据属性更新之后`);
+        },
+        // 只执行一次
+        beforeDestroy() {
+            console.log(`beforeDestroy() 销毁之前`);
+        },
+        // 只执行一次
+        destroyed() {
+            console.log(`destroyed() 销毁之后`);
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-条件语句</title>
+</head>
+<body>
+<div id="app">
+    <!-- v-if 用于条件性地渲染一块内容-->
+    <h2>1. v-if</h2>
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>Oh, no.</h1>
+    <h2>2. v-else</h2>
+    <div v-if="Math.random() > 0.5">
+        Now you can see me.
+    </div>
+    <div v-else>
+        Now you can't see me.
+    </div>
+    <h2>3. v-else-if</h2>
+    <div v-if="type === 'A'">
+        A
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Not A/B/C
+    </div>
+
+    <!--在<template> 元素上使用 v-if 条件渲染分组，最终的渲染结果将不包含 <template> 元素-->
+    <h2>3. template</h2>
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+
+    <h2>4. 用 key 管理可复用的元素</h2>
+    <template v-if="loginMethod === 'userName'">
+        <label>UserName</label>
+        <input type="text" placeholder="Enter your user name" key="userName-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input type="text" placeholder="Enter your user email" key="email-input">
+    </template>
+    <br/>
+    <button @click="switchLoginMethod">切换登录方式</button>
+
+    <h2>4. v-show</h2>
+    <p v-show="ok">Show me.</p>
+</div>
+</body>
+<script rel="script" src="js/vue-2.6.10.js"></script>
+<script>
+    // 创建 Vue 实例
+    let app = new Vue({
+        el: '#app',
+        data: {
+            awesome: false,
+            ok: true,
+            type: 'A',
+            loginMethod: 'userName'
+        },
+        methods: {
+            switchLoginMethod(){
+                this.loginMethod = this.loginMethod === 'userName' ? 'email' : 'userName';
+            }
+        }
+    });
+</script>
+</html>
