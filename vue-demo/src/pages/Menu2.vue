@@ -3,8 +3,12 @@
     <ul>
       <li v-for="(user, index) in userList" :key="index">
         <router-link :to="`/menu2/subMenu3?userId=${user.id}`">{{user.userName}}</router-link>
+        <br>
+        <button @click="pushShow(user.id)">push显示方式</button>
+        <button @click="replaceShow(user.id)">replace显示方式</button>
       </li>
     </ul>
+    <button @click="$router.back()">后退</button>
     <hr>
     <router-view></router-view>
   </div>
@@ -19,6 +23,14 @@
       return {
         userList: []
       };
+    },
+    methods: {
+      pushShow(id) {
+        this.$router.push(`/menu2/subMenu3?userId=${id}`);
+      },
+      replaceShow(id) {
+        this.$router.replace(`/menu2/subMenu3?userId=${id}`);
+      }
     },
     mounted() {
       let api = 'http://localhost:3000/users';
