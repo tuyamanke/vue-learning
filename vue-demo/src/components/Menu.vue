@@ -9,6 +9,10 @@
         <a :href="'http://localhost:8080/menu/' + menu.id">{{menu.name}}</a>
       </li>
     </ul>
+    <br>
+    <br>
+    <input type="text" v-model="content">
+    <button @click="add">添加菜单</button>
   </div>
 </template>
 
@@ -16,8 +20,26 @@
   export default {
     name: "Menu",
     // 通过 props 声明从父组件接收的数据属性
+    // 通过 props 声明从父组件接收的方法属性 addMenu
     // 之后就可以像自己定义的一样使用了
-    props: ['menus', 'webSite']
+    props: ['menus', 'webSite', 'addMenu'],
+    data() {
+      return {
+        content: ''
+      }
+    },
+    methods: {
+      add() {
+        const content = this.content.trim();
+        if (!content) {
+          alert(`菜单名称不能为空。`);
+          return;
+        }
+        let menu = {id: 5, name: content};
+        this.addMenu(menu);
+        this.content = '';
+      }
+    }
   }
 </script>
 

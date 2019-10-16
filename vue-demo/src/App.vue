@@ -1,7 +1,8 @@
 <template>
   <div>
     <!--将父组件中的数据传递给子组件-->
-    <Menu :menus="menus" :webSite="webSite"/>
+    <!--将父组件中的方法 addMenu 传递给子组件-->
+    <Menu :menus="menus" :webSite="webSite" :addMenu="addMenu"/>
   </div>
 </template>
 
@@ -32,6 +33,12 @@
           url: 'https://cn.vuejs.org',
           title: 'Vue 官网:)'
         }
+      }
+    },
+    methods: {
+      addMenu(menu) {
+        // 向 menus 数组尾部添加新的菜单
+        this.menus.push(menu);
       }
     }
   }
