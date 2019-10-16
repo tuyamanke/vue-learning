@@ -1,6 +1,7 @@
 <template>
     <div>
       子菜单2
+      <input type="text">
     </div>
 </template>
 

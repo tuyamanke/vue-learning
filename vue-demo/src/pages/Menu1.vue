@@ -11,7 +11,9 @@
       </ul>
     </div>
     <div class="content">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -24,8 +26,9 @@
 
 <style scoped>
   .main {
-    display:flex;
+    display: flex;
   }
+
   ul li {
     list-style-type: none;
   }
