@@ -57,6 +57,12 @@
         console.log(message);
         this.addMenu(data);
       });
+      let api = 'https://api.apiopen.top/getJoke?page=1&count=2&type=video';
+      this.$http.get(api).then(response => { // 请求成功时的回调
+        console.log(response.body);
+      }, response => {// 请求失败时的回调
+        alert(`请求失败`);
+      });
     }
   }
 </script>
