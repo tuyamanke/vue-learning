@@ -2,12 +2,9 @@
 
 import Vue from 'vue'
 import App from './App'
-import VueResource from 'vue-resource'
+// router 文件夹下的 index.js 就不用写了，默认就能找到
+import router from './router'
 
-// 在 main.js 中进行全局引入
-// 声明使用插件，底层会给 Vue 实例对象添加一个属性 $http
-// 但 Axios 不可以这样全局引入
-Vue.use(VueResource);
 
 new Vue({
   el: '#app',
@@ -16,5 +13,9 @@ new Vue({
     App
   },
   // 通过指定 template 来渲染标签
-  template: '<App/>'
+  template: '<App/>',
+  // 配置路由
+  // router: router
+  // ES6 的写法
+  router
 });
