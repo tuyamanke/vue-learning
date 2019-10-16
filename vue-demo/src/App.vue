@@ -2,20 +2,29 @@
   <div>
     <!--将父组件中的数据传递给子组件-->
     <Menu :menus="menus" :webSite="webSite"/>
+    <Foot>
+      <!--指定子组件中插槽的 name 就可以往插槽里放内容了，可以放 HTML 元素-->
+      <div slot="footSlot">
+        版权所有：{{copyRight}}
+      </div>
+    </Foot>
   </div>
 </template>
 
 <script>
   import PubSub from 'pubsub-js'
   import Menu from './components/Menu'
+  import Foot from './components/Foot'
 
   export default {
     name: 'App',
     components: {
-      Menu
+      Menu,
+      Foot
     },
     data() {
       return {
+        copyRight: "www.tuyamanke.com",
         menus: [{
           id: 1,
           name: '科技'
