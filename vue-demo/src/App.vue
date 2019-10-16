@@ -1,8 +1,7 @@
 <template>
   <div>
     <!--将父组件中的数据传递给子组件-->
-    <!--将父组件中的方法 addMenu 传递给子组件-->
-    <Menu :menus="menus" :webSite="webSite" :addMenu="addMenu"/>
+    <Menu :menus="menus" :webSite="webSite" @addMenuEvent="addMenu"/>
   </div>
 </template>
 

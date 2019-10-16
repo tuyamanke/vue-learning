@@ -20,9 +20,8 @@
   export default {
     name: "Menu",
     // 通过 props 声明从父组件接收的数据属性
-    // 通过 props 声明从父组件接收的方法属性 addMenu
     // 之后就可以像自己定义的一样使用了
-    props: ['menus', 'webSite', 'addMenu'],
+    props: ['menus', 'webSite'],
     data() {
       return {
         content: ''
@@ -36,7 +35,7 @@
           return;
         }
         let menu = {id: 5, name: content};
-        this.addMenu(menu);
+        this.$emit('addMenuEvent', menu);
         this.content = '';
       }
     }
