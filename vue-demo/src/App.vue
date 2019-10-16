@@ -1,11 +1,12 @@
 <template>
   <div>
     <!--将父组件中的数据传递给子组件-->
-    <Menu :menus="menus" :webSite="webSite" ref="menu"/>
+    <Menu :menus="menus" :webSite="webSite"/>
   </div>
 </template>
 
 <script>
+  import PubSub from 'pubsub-js'
   import Menu from './components/Menu'
 
   export default {
@@ -41,7 +42,12 @@
       }
     },
     mounted() {
-      this.$refs.menu.$on('addMenuEvent', this.addMenu)
+      // 这里用箭头函数，this 正好获取到当前的 Vue 实例对象
+      PubSub.subscribe('addMenuMessageId', (message, data) => {
+        // 这个 message 参数就是 发布订阅 消息唯一标识 此处就是 addMenuMessageId
+        console.log(message);
+        this.addMenu(data);
+      });
     }
   }
 </script>

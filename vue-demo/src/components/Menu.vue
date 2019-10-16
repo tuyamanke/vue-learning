@@ -17,6 +17,8 @@
 </template>
 
 <script>
+  import PubSub from 'pubsub-js'
+
   export default {
     name: "Menu",
     // 通过 props 声明从父组件接收的数据属性
@@ -35,7 +37,7 @@
           return;
         }
         let menu = {id: 5, name: content};
-        this.$emit('addMenuEvent', menu);
+        PubSub.publish('addMenuMessageId', menu);
         this.content = '';
       }
     }
