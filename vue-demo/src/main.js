@@ -2,8 +2,8 @@
 
 import Vue from 'vue'
 import App from './App'
-// router 文件夹下的 index.js 就不用写了，默认就能找到
-import router from './router'
+// 引入 store.js
+import store from './store'
 
 
 new Vue({
@@ -14,8 +14,6 @@ new Vue({
   },
   // 通过指定 template 来渲染标签
   template: '<App/>',
-  // 配置路由
-  // router: router
-  // ES6 的写法
-  router
+  // 这样所有的 Vue 实例都有了一个 $store 对象
+  store
 });
